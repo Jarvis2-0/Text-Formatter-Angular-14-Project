@@ -1,0 +1,28 @@
+.formatters {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+button {
+  margin: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+input[type="color"] {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}

@@ -1,0 +1,28 @@
+<header>
+  Text Formatter
+</header>
+<div class="container">
+  <app-text-display
+    [rawText]="rawText"
+    [isBold]="isBold"
+    [isItalic]="isItalic"
+    [isUnderline]="isUnderline"
+    [textColor]="textColor"
+    [fontSize]="fontSize"
+    (textChange)="onTextChange($event)"
+  ></app-text-display>
+  <app-formatters
+    (clear)="clearText()"
+    (removeWhitespace)="removeExtraSpaces()"
+    (reverseAll)="reverseSentence()"
+    (removeSpecialChar)="removeSpecialChars()"
+    (capitalizeWord)="capitalizeWords()"
+    (boldToggle)="toggleBold()"
+    (italicToggle)="toggleItalic()"
+    (underlineToggle)="toggleUnderline()"
+    (colorChange)="changeColor($event)"
+    (fontSizeIncrease)="increaseFontSize()"
+    (fontSizeDecrease)="decreaseFontSize()"
+    (removeStyling)="removeStyling()"
+  ></app-formatters>
+</div>

@@ -1,0 +1,28 @@
+<div class="formatters">
+  <h2>Formatters</h2>
+
+  <div class="section">
+    <button (click)="clear.emit()">Clear All</button>
+    <button (click)="reverseAll.emit()">Reverse All</button>
+    <button (click)="removeStyling.emit()">Remove styling</button>
+    <button (click)="removeWhitespace.emit()">White-space Remove</button>
+    <button (click)="removeSpecialChar.emit()">Remove Special Char</button>
+    <button (click)="capitalizeWord.emit()">Capitalize Word</button>
+  </div>
+
+  <div class="section">
+    <h3>Text Styling</h3>
+    <button (click)="boldToggle.emit()">Bold</button>
+    <button (click)="italicToggle.emit()">Italic</button>
+    <button (click)="underlineToggle.emit()">Underline</button>
+    <div>
+      <label>Color Picker:</label>
+      <input type="color" (change)="onColorChange($event)" />
+    </div>
+    <div>
+      <button (click)="fontSizeDecrease.emit()">-</button>
+      <span> Font Size </span>
+      <button (click)="fontSizeIncrease.emit()">+</button>
+    </div>
+  </div>
+</div>

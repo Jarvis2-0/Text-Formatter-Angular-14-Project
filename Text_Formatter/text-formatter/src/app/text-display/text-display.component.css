@@ -1,0 +1,39 @@
+.text-display {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.output-box {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border: 1px dashed #aaa;
+  min-height: 100px;
+  background-color: #f9f9f9;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  transition: all 0.2s ease;
+}
+
+.counts {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+}
