@@ -1,8 +1,6 @@
-<header>
-  Text Formatter
-</header>
-<div class="container">
-  <app-text-display
+<div class="home-container">
+  <div class="container">
+    <app-text-display
     [rawText]="rawText"
     [isBold]="isBold"
     [isItalic]="isItalic"
@@ -10,8 +8,8 @@
     [textColor]="textColor"
     [fontSize]="fontSize"
     (textChange)="onTextChange($event)"
-  ></app-text-display>
-  <app-formatters
+    ></app-text-display>
+    <app-formatters
     (clear)="clearText()"
     (removeWhitespace)="removeExtraSpaces()"
     (reverseAll)="reverseSentence()"
@@ -25,4 +23,5 @@
     (fontSizeDecrease)="decreaseFontSize()"
     (removeStyling)="removeStyling()"
   ></app-formatters>
+  </div>
 </div>

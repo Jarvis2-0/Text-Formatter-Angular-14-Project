@@ -1,14 +1,14 @@
 <div class="text-display">
-  <label>Type Text : -</label>
+  <label>✏️ Type Text : -</label>
   <input type="text" [value]="rawText" (input)="onInputChange($event)" placeholder="Start typing..." />
 
-  <label>Output Text :-</label>
+  <label>📄 Output Text :-</label>
   <div class="output-box" [ngStyle]="getOutputStyles()">
     {{ rawText || 'Your formatted text will appear here...' }}
   </div>
 
   <div class="counts">
-    <p>Word Count: <strong>{{ wordCount$ | async }}</strong> Words</p>
-    <p>Char Count: <strong>{{ charCount$ | async }}</strong> Chars</p>
+    <p>📊 Word Count: <strong>{{ wordCount$ | async }}</strong> Words</p>
+    <p>🔡 Char Count: <strong>{{ charCount$ | async }}</strong> Chars</p>
   </div>
 </div>

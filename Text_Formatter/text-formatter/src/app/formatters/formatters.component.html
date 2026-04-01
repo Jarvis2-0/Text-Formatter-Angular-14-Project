@@ -1,28 +1,28 @@
 <div class="formatters">
-  <h2>Formatters</h2>
+  <h2>✨ Formatters</h2>
 
   <div class="section">
-    <button (click)="clear.emit()">Clear All</button>
-    <button (click)="reverseAll.emit()">Reverse All</button>
-    <button (click)="removeStyling.emit()">Remove styling</button>
-    <button (click)="removeWhitespace.emit()">White-space Remove</button>
-    <button (click)="removeSpecialChar.emit()">Remove Special Char</button>
-    <button (click)="capitalizeWord.emit()">Capitalize Word</button>
+    <button (click)="clear.emit()" class="btn-clear">🧹 Clear All</button>
+    <button (click)="reverseAll.emit()" class="btn-reverse">🔄 Reverse All</button>
+    <button (click)="removeStyling.emit()" class="btn-remove-style">🎨 Remove styling</button>
+    <button (click)="removeWhitespace.emit()" class="btn-whitespace">🚫 White-space Remove</button>
+    <button (click)="removeSpecialChar.emit()" class="btn-special">⚡ Remove Special Char</button>
+    <button (click)="capitalizeWord.emit()" class="btn-capitalize">🔠 Capitalize Word</button>
   </div>
 
   <div class="section">
     <h3>Text Styling</h3>
-    <button (click)="boldToggle.emit()">Bold</button>
-    <button (click)="italicToggle.emit()">Italic</button>
-    <button (click)="underlineToggle.emit()">Underline</button>
-    <div>
-      <label>Color Picker:</label>
+    <button (click)="boldToggle.emit()" class="style-btn bold">𝐁</button>
+    <button (click)="italicToggle.emit()" class="style-btn italic">𝐼</button>
+    <button (click)="underlineToggle.emit()" class="style-btn underline">𝑈</button>
+    <div class="color-picker">
+      <h3>🎨 Color Picker:</h3>
       <input type="color" (change)="onColorChange($event)" />
     </div>
-    <div>
-      <button (click)="fontSizeDecrease.emit()">-</button>
-      <span> Font Size </span>
-      <button (click)="fontSizeIncrease.emit()">+</button>
+    <div class="font-size">
+      <button (click)="fontSizeDecrease.emit()" class="font-btn">-</button>
+      <span> 🔠 Font Size </span>
+      <button (click)="fontSizeIncrease.emit()" class="font-btn">+</button>
     </div>
   </div>
 </div>

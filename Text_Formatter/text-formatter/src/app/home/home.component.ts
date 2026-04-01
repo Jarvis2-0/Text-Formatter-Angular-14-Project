@@ -44,9 +44,7 @@ export class HomeComponent {
   }
 
   capitalizeWords(): void {
-    this.rawText = this.rawText.split(/\s+/).map(word =>
-      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    ).join(' ');
+    this.rawText = this.rawText.toUpperCase();
     this.textService.updateCounts(this.rawText);
   }
 
