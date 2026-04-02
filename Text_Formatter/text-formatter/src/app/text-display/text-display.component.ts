@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TextService } from '../services/text.service';
 
 @Component({
   selector: 'app-text-display',
@@ -7,7 +6,8 @@ import { TextService } from '../services/text.service';
   styleUrls: ['./text-display.component.css']
 })
 export class TextDisplayComponent {
-  @Input() rawText = '';
+  @Input() inputText = '';
+  @Input() outputText = '';
   @Input() isBold = false;
   @Input() isItalic = false;
   @Input() isUnderline = false;
@@ -15,11 +15,6 @@ export class TextDisplayComponent {
   @Input() fontSize = 16;
 
   @Output() textChange = new EventEmitter<string>();
-
-  wordCount$ = this.textService.getWordCount();
-  charCount$ = this.textService.getCharCount();
-
-  constructor(private textService: TextService) {}
 
   onInputChange(event: Event): void {
     const newText = (event.target as HTMLInputElement).value;

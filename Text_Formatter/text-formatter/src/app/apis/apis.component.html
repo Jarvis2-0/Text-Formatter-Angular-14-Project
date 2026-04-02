@@ -1,94 +1,62 @@
-<div class="apis-container">
-  <div class="grid">
-    <!-- LEFT COLUMN: Controls -->
-    <div class="controls">
-      <div class="resource-id">
-        <label>🔢 ID :-</label>
-        <input type="number" [(ngModel)]="resourceId" placeholder="Enter ID" />
-      </div>
-
-      <div class="action-buttons">
-        <button (click)="fetchComment()" class="btn-comment">💬 Comment</button>
-        <button (click)="fetchAlbum()" class="btn-album">📀 Album</button>
-        <button (click)="fetchPhoto()" class="btn-photo">🖼️ Photo</button>
-        <button (click)="fetchTodo()" class="btn-todo">✅ Todo</button>
-      </div>
-
-      <div class="crud-buttons">
-        <button (click)="deletePost()" class="btn-delete">🗑️ Delete</button>
-        <button (click)="updatePost()" class="btn-update">✏️ Update</button>
-        <button (click)="createPost()" class="btn-create">➕ Create</button>
-      </div>
-
-      <div class="input-body">
-        <label>📝 Input Body :-</label>
-        <textarea [(ngModel)]="requestBody" rows="4" placeholder="Enter JSON or text for Update/Create"></textarea>
-      </div>
+<div class="api-interface">
+  <div class="left-column">
+    <div class="user-id">
+      <label>User Id :-</label>
+      <input type="number" [(ngModel)]="resourceId" placeholder="Enter ID" />
     </div>
+    <div class="category-buttons">
+      <button (click)="fetchComment()">Comments</button>
+      <button (click)="fetchAlbum()">Albums</button>
+      <button (click)="fetchPhoto()">Photos</button>
+      <button (click)="fetchTodo()">Todos</button>
+    </div>
+    <div class="crud-buttons">
+      <button class="brown" (click)="deletePost()">Delete</button>
+      <button class="brown" (click)="updatePost()">Update</button>
+      <button class="brown" (click)="createPost()">Create</button>
+    </div>
+    <div class="input-body">
+      <label>Input Body :-</label>
+      <textarea [(ngModel)]="requestBody" rows="4" placeholder="Enter JSON or text for Update/Create"></textarea>
+    </div>
+  </div>
 
-    <!-- RIGHT COLUMN: Response & Error -->
-    <div class="response-panel">
-      <div class="error-block">
-        <h3>⚠️ Error Msg</h3>
-        <div class="error" *ngIf="errorMessage; else noError">
-          {{ errorMessage }}
+  <div class="right-column">
+    <div class="error-box">
+      <h3>Error Msg</h3>
+      <div class="error-content" *ngIf="errorMessage; else noError">{{ errorMessage }}</div>
+      <ng-template #noError><div class="no-error">No errors</div></ng-template>
+    </div>
+    <div class="response-box">
+      <h3>Response Data</h3>
+      <div class="response-scroll" *ngIf="!loading; else spinner">
+        <div *ngIf="isCommentResponse()" class="single-item">
+          <div><strong>ID:</strong> {{ responseData.id }}</div>
+          <div><strong>Name:</strong> {{ responseData.name }}</div>
+          <div><strong>Email:</strong> {{ responseData.email }}</div>
+          <div><strong>Body:</strong> {{ responseData.body }}</div>
         </div>
-        <ng-template #noError>
-          <div class="no-error">✓ No errors</div>
-        </ng-template>
-      </div>
-
-      <div class="response-data">
-        <h3>📦 Response Data</h3>
-        <div class="scrollable" *ngIf="!loading; else loadingSpinner">
-
-          <!-- Single Comment -->
-          <div *ngIf="isCommentResponse()" class="single-item">
-            <div class="item-field"><strong>ID:</strong> {{ responseData.id }}</div>
-            <div class="item-field"><strong>Name:</strong> {{ responseData.name }}</div>
-            <div class="item-field"><strong>Email:</strong> {{ responseData.email }}</div>
-            <div class="item-field"><strong>Body:</strong> {{ responseData.body }}</div>
-          </div>
-
-          <!-- Single Album -->
-          <div *ngIf="isAlbumResponse()" class="single-item">
-            <div class="item-field"><strong>ID:</strong> {{ responseData.id }}</div>
-            <div class="item-field"><strong>Title:</strong> {{ responseData.title }}</div>
-            <div class="item-field"><strong>User ID:</strong> {{ responseData.userId }}</div>
-          </div>
-
-          <!-- Single Photo -->
-          <div *ngIf="isPhotoResponse()" class="single-item">
-            <div class="item-field"><strong>ID:</strong> {{ responseData.id }}</div>
-            <div class="item-field"><strong>Title:</strong> {{ responseData.title }}</div>
-            <div class="item-field"><strong>URL:</strong> <a [href]="responseData.url" target="_blank">{{ responseData.url }}</a></div>
-            <div class="item-field">
-              <strong>Thumbnail:</strong><br/>
-              <img [src]="responseData.thumbnailUrl" [alt]="responseData.title" />
-            </div>
-          </div>
-
-          <!-- Single Todo -->
-          <div *ngIf="isTodoResponse()" class="single-item">
-            <div class="item-field"><strong>ID:</strong> {{ responseData.id }}</div>
-            <div class="item-field"><strong>Title:</strong> {{ responseData.title }}</div>
-            <div class="item-field"><strong>Completed:</strong> {{ responseData.completed ? '✅' : '❌' }}</div>
-          </div>
-
-          <!-- Delete/Update/Create success message -->
-          <div *ngIf="isSimpleMessage()" class="simple-message">
-            <pre>{{ responseData | json }}</pre>
-          </div>
-
-          <!-- Fallback -->
-          <div *ngIf="!isCommentResponse() && !isAlbumResponse() && !isPhotoResponse() && !isTodoResponse() && !isSimpleMessage() && responseData" class="json-fallback">
-            <pre>{{ responseData | json }}</pre>
-          </div>
+        <div *ngIf="isAlbumResponse()" class="single-item">
+          <div><strong>ID:</strong> {{ responseData.id }}</div>
+          <div><strong>Title:</strong> {{ responseData.title }}</div>
+          <div><strong>User ID:</strong> {{ responseData.userId }}</div>
         </div>
-        <ng-template #loadingSpinner>
-          <div class="spinner">⏳ Loading...</div>
-        </ng-template>
+        <div *ngIf="isPhotoResponse()" class="single-item">
+          <div><strong>ID:</strong> {{ responseData.id }}</div>
+          <div><strong>Title:</strong> {{ responseData.title }}</div>
+          <div><strong>URL:</strong> <a [href]="responseData.url" target="_blank">{{ responseData.url }}</a></div>
+          <div><strong>Thumbnail:</strong><br/><img [src]="responseData.thumbnailUrl" /></div>
+        </div>
+        <div *ngIf="isTodoResponse()" class="single-item">
+          <div><strong>ID:</strong> {{ responseData.id }}</div>
+          <div><strong>Title:</strong> {{ responseData.title }}</div>
+          <div><strong>Completed:</strong> {{ responseData.completed ? 'Yes' : 'No' }}</div>
+        </div>
+        <div *ngIf="isSimpleMessage()" class="single-item">
+          <pre>{{ responseData | json }}</pre>
+        </div>
       </div>
+      <ng-template #spinner><div class="spinner">Loading...</div></ng-template>
     </div>
   </div>
 </div>

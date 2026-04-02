@@ -8,75 +8,76 @@ import { RemoveSpecialCharPipe } from '../pipes/remove-special-char.pipe';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  rawText = '';
+  inputText = '';
+  outputText = '';
+
+  // Styling
   isBold = false;
   isItalic = false;
   isUnderline = false;
-  textColor = '#000000';
+  textColor = '#080808';
   fontSize = 16;
+
+  wordCount$ = this.textService.getWordCount();
+  charCount$ = this.textService.getCharCount();
 
   constructor(private textService: TextService) {}
 
-  onTextChange(newText: string): void {
-    this.rawText = newText;
-    this.textService.updateCounts(this.rawText);
+  get outputStyles() {
+    return {
+      'font-weight': this.isBold ? 'bold' : 'normal',
+      'font-style': this.isItalic ? 'italic' : 'normal',
+      'text-decoration': this.isUnderline ? 'underline' : 'none',
+      'color': this.textColor,
+      'font-size': this.fontSize + 'px'
+    };
   }
 
-  clearText(): void {
-    this.rawText = '';
-    this.textService.updateCounts(this.rawText);
+  private updateCounts() {
+    this.textService.updateCounts(this.outputText);
   }
 
-  removeExtraSpaces(): void {
-    this.rawText = this.rawText.replace(/\s+/g, ' ').trim();
-    this.textService.updateCounts(this.rawText);
+  onTextChange(event: Event) {
+    this.inputText = (event.target as HTMLTextAreaElement).value;
+    this.outputText = this.inputText;
+    this.updateCounts();
   }
 
-  reverseSentence(): void {
-    this.rawText = this.rawText.split('').reverse().join('');
-    this.textService.updateCounts(this.rawText);
+  clearText() {
+    this.inputText = '';
+    this.outputText = '';
+    this.updateCounts();
   }
-
-  removeSpecialChars(): void {
+  removeWhiteSpace() {
+    this.outputText = this.outputText.replace(/\s+/g, ' ').trim();
+    this.updateCounts();
+  }
+  reverseAll() {
+    this.outputText = this.outputText.split('').reverse().join('');
+    this.updateCounts();
+  }
+  removeSpecialChar() {
     const pipe = new RemoveSpecialCharPipe();
-    this.rawText = pipe.transform(this.rawText);
-    this.textService.updateCounts(this.rawText);
+    this.outputText = pipe.transform(this.outputText);
+    this.updateCounts();
   }
-
-  capitalizeWords(): void {
-    this.rawText = this.rawText.toUpperCase();
-    this.textService.updateCounts(this.rawText);
+  capitalizeWord() {
+    this.outputText = this.outputText.toUpperCase();
+    this.updateCounts();
   }
-
-  toggleBold(): void {
-    this.isBold = !this.isBold;
-  }
-
-  toggleItalic(): void {
-    this.isItalic = !this.isItalic;
-  }
-
-  toggleUnderline(): void {
-    this.isUnderline = !this.isUnderline;
-  }
-
-  changeColor(color: string): void {
-    this.textColor = color;
-  }
-
-  increaseFontSize(): void {
-    this.fontSize = Math.min(this.fontSize + 1, 50);
-  }
-
-  decreaseFontSize(): void {
-    this.fontSize = Math.max(this.fontSize - 1, 8);
-  }
-
-  removeStyling(): void {
+  removeStyling() {
     this.isBold = false;
     this.isItalic = false;
     this.isUnderline = false;
     this.textColor = '#000000';
     this.fontSize = 16;
   }
+  toggleBold() { this.isBold = !this.isBold; }
+  toggleItalic() { this.isItalic = !this.isItalic; }
+  toggleUnderline() { this.isUnderline = !this.isUnderline; }
+  changeColor(color: string): void {
+  this.textColor = color;
+  }
+  increaseFontSize() { this.fontSize = Math.min(this.fontSize + 1, 50); }
+  decreaseFontSize() { this.fontSize = Math.max(this.fontSize - 1, 8); }
 }
