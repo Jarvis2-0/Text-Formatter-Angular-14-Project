@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TextService } from '../services/text.service';
 import { RemoveSpecialCharPipe } from '../pipes/remove-special-char.pipe';
+// DO NOT import Event from '@angular/router'
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,6 @@ export class HomeComponent {
   inputText = '';
   outputText = '';
 
-  // Styling
   isBold = false;
   isItalic = false;
   isUnderline = false;
@@ -48,23 +48,28 @@ export class HomeComponent {
     this.outputText = '';
     this.updateCounts();
   }
+
   removeWhiteSpace() {
     this.outputText = this.outputText.replace(/\s+/g, ' ').trim();
     this.updateCounts();
   }
+
   reverseAll() {
     this.outputText = this.outputText.split('').reverse().join('');
     this.updateCounts();
   }
+
   removeSpecialChar() {
     const pipe = new RemoveSpecialCharPipe();
     this.outputText = pipe.transform(this.outputText);
     this.updateCounts();
   }
+
   capitalizeWord() {
     this.outputText = this.outputText.toUpperCase();
     this.updateCounts();
   }
+
   removeStyling() {
     this.isBold = false;
     this.isItalic = false;
@@ -72,12 +77,20 @@ export class HomeComponent {
     this.textColor = '#000000';
     this.fontSize = 16;
   }
+
   toggleBold() { this.isBold = !this.isBold; }
   toggleItalic() { this.isItalic = !this.isItalic; }
   toggleUnderline() { this.isUnderline = !this.isUnderline; }
+  
   changeColor(color: string): void {
-  this.textColor = color;
+    this.textColor = color;
   }
+
+  onColorChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.changeColor(target.value);
+  }
+  
   increaseFontSize() { this.fontSize = Math.min(this.fontSize + 1, 50); }
   decreaseFontSize() { this.fontSize = Math.max(this.fontSize - 1, 8); }
 }

@@ -1,5 +1,6 @@
-<div class="formatters">
-  <div class="action-buttons">
+<div class="formatters-container">
+  <!-- Grid of six action buttons -->
+  <div class="action-grid">
     <button (click)="clear.emit()">Clear All</button>
     <button (click)="removeWhitespace.emit()">White-space Remove</button>
     <button (click)="reverseAll.emit()">Reverse All</button>
@@ -7,12 +8,14 @@
     <button (click)="removeStyling.emit()">Remove styling</button>
     <button (click)="capitalizeWord.emit()">Capitalize Word</button>
   </div>
-  <div class="style-buttons">
-    <button (click)="boldToggle.emit()">B</button>
-    <button (click)="italicToggle.emit()">I</button>
-    <button (click)="underlineToggle.emit()">U</button>
+
+  <!-- Bottom formatting toolbar -->
+  <div class="format-toolbar">
+    <button (click)="boldToggle.emit()"><b>B</b></button>
+    <button (click)="italicToggle.emit()"><i>I</i></button>
+    <button (click)="underlineToggle.emit()"><u>U</u></button>
     <input type="color" (change)="onColorChange($event)" />
     <button (click)="fontSizeDecrease.emit()">-</button>
     <button (click)="fontSizeIncrease.emit()">+</button>
   </div>
-</div>
+</div>S

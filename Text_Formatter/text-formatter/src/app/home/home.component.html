@@ -1,35 +1,41 @@
-<div class="text-formatter-page">
-  <h1>Text Formatter</h1>
+<div class="page">
   <div class="two-columns">
-    <!-- LEFT PANEL: textareas -->
+    <!-- LEFT PANEL (unchanged) -->
     <div class="left-panel">
-      <label>Type Text :-</label>
       <textarea rows="4" [(ngModel)]="inputText" (input)="onTextChange($event)" placeholder="Type text"></textarea>
-      <label>Output Text :-</label>
-      <textarea rows="4" [ngStyle]="outputStyles" [(ngModel)]="outputText" readonly></textarea>
+      <textarea rows="4" [ngStyle]="outputStyles" [(ngModel)]="outputText" readonly placeholder="Output text"></textarea>
     </div>
 
-    <!-- RIGHT PANEL: stats + formatters component -->
-    <div class="right-panel">
+    <!-- RIGHT PANEL – outer container -->
+    <div class="right-panel-outer">
+      <!-- Inner box 1: Statistics -->
       <div class="stats-box">
-        <p>Word Count: <strong>{{ wordCount$ | async }}</strong> Words</p>
-        <p>Char Count: <strong>{{ charCount$ | async }}</strong> Chars</p>
+        <div>Word Count: <strong>{{ wordCount$ | async }}</strong> Words</div>
+        <div>Char Count: <strong>{{ charCount$ | async }}</strong> Chars</div>
       </div>
-      <!-- Use the child component, no duplicate buttons -->
-      <app-formatters
-        (clear)="clearText()"
-        (removeWhitespace)="removeWhiteSpace()"
-        (reverseAll)="reverseAll()"
-        (removeSpecialChar)="removeSpecialChar()"
-        (capitalizeWord)="capitalizeWord()"
-        (boldToggle)="toggleBold()"
-        (italicToggle)="toggleItalic()"
-        (underlineToggle)="toggleUnderline()"
-        (colorChange)="changeColor($event)"
-        (fontSizeIncrease)="increaseFontSize()"
-        (fontSizeDecrease)="decreaseFontSize()"
-        (removeStyling)="removeStyling()"
-      ></app-formatters>
+
+      <!-- Inner box 2: Buttons + Toolbar -->
+      <div class="controls-box">
+        <!-- Six action buttons (grid) -->
+        <div class="button-grid">
+          <button (click)="clearText()">Clear All</button>
+          <button (click)="removeWhiteSpace()">White-space Remove</button>
+          <button (click)="reverseAll()">Reverse All</button>
+          <button (click)="removeSpecialChar()">Remove Special Char</button>
+          <button (click)="removeStyling()">Remove styling</button>
+          <button (click)="capitalizeWord()">Capitalize Word</button>
+        </div>
+
+        <!-- Formatting toolbar -->
+        <div class="toolbar">
+          <button (click)="toggleBold()" [class.active]="isBold"><b>B</b></button>
+          <button (click)="toggleItalic()" [class.active]="isItalic"><i>I</i></button>
+          <button (click)="toggleUnderline()" [class.active]="isUnderline"><u>U</u></button>
+          <input type="color" (change)="onColorChange($event)" />
+          <button (click)="increaseFontSize()">+</button>
+          <button (click)="decreaseFontSize()">-</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
