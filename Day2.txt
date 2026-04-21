@@ -1,0 +1,18 @@
+Today I extended the Text Formatter app by adding a new API Explorer section. Here’s what I did in simple words:
+
+Created a new component called ApisComponent and a navigation bar to switch between the original text formatter and the new API page.
+
+Built an API service to fetch data from the public API (JSONPlaceholder). It can get a single comment, album, photo, or todo by its ID.
+
+Added buttons to fetch that data, and also Delete, Update, and Create posts (using the same ID as the post ID).
+
+Designed a clean layout with two columns: one for controls (ID input, buttons, request body) and one for showing the response and any error messages.
+
+Made the response display nicely: for a comment, it shows name, email, body; for a photo, it shows the image; for an album and todo, it shows the title and completion status.
+
+Added validation – if you try to fetch without entering an ID, an error message appears.
+
+Made everything look modern with gradient buttons, emojis, rounded corners, and a consistent look that matches the text formatter page.
+
+Fixed the “Capitalize Word” button in the text formatter to convert the whole text to uppercase instead of just the first letter.
+
